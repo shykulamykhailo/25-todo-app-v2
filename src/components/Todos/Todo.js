@@ -13,7 +13,6 @@ function Todo({ todo, deleteTodo, toggleTodo }) {
       <div className={styles.todoText}>{todo.text}</div>
       <RiDeleteBin2Line
         className={styles.deleteIcon}
-        on
         onClick={() => deleteTodo(todo.id)}
       />
       <FaCheck

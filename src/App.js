@@ -10,25 +10,25 @@ function App() {
 
   const addTodoHandler = (text) => {
     const newTodo = {
-      text: text,
+      text,
       isComplited: false,
       id: uuidv4(),
     }
 
     setTodos([...todos, newTodo])
   }
-
+  
   const deleteTodoHandler = (id) => {
     setTodos(todos.filter((todo) => todo.id !== id))
   }
 
   const toggleTodoHandler = (id) => {
     setTodos(
-      todos.map((todo) => {
-        return todo.id === id
+      todos.map((todo) =>
+        todo.id === id
           ? { ...todo, isComplited: !todo.isComplited }
           : { ...todo }
-      })
+      )
     )
   }
 
@@ -40,14 +40,21 @@ function App() {
     setTodos(todos.filter((todo) => !todo.isComplited))
   }
 
+  const completedTodosCount = todos.filter((todo) => todo.isCompleted).length
+  console.log(completedTodosCount)
+
   return (
     <div className="App">
       <h1>Todo App</h1>
       <TodoForm addTodo={addTodoHandler} />
-      <TodoActions
-        resetTodos={resetTodosHandler}
-        deleteComplitedTodos={deleteComplitedTodosHandler}
-      />
+      {!!todos.length && (
+        <TodoActions
+          completedTodosExist={!!completedTodosCount}
+          resetTodos={resetTodosHandler}
+          deleteComplitedTodos={deleteComplitedTodosHandler}
+        />
+      )}
+
       <TodoList
         todos={todos}
         deleteTodo={deleteTodoHandler}
